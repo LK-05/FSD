@@ -1,0 +1,410 @@
+Design a web form for signing up with the following fields: (CO2) [Application] Name: a required text input field for the user's name
+Date of Birth: a required date input field for the user's date of birth
+Age: a range input field for the user's age, with a minimum value of 18 and a maximum value of 100
+
+
+<form id="signup-form">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required>
+
+  <label for="dob">Date of Birth:</label>
+  <input type="date" id="dob" name="dob" required>
+
+  <label for="age">Age:</label>
+  <input type="range" id="age" name="age" min="18" max="100" required>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="website">Website:</label>
+  <input type="url" id="website" name="website">
+
+  <button type="submit">Sign Up</button>
+</form>
+
+<script>
+  const ageInput = document.getElementById("age");
+  const emailInput = document.getElementById("email");
+  const websiteInput = document.getElementById("website");
+
+  ageInput.addEventListener("input", function() {
+    const age = parseInt(this.value);
+    if (age < 18) {
+      emailInput.style.display = "none";
+      websiteInput.style.display = "none";
+    } else if (age >= 18 && age <= 25) {
+      emailInput.style.display = "block";
+      websiteInput.style.display = "none";
+    } else {
+      emailInput.style.display = "block";
+      websiteInput.style.display = "block";
+    }
+  });
+
+  document.getElementById("signup-form").addEventListener("submit", function(event) {
+    const requiredInputs = document.querySelectorAll("#signup-form [required]");
+    let isValid = true;
+    requiredInputs.forEach(function(input) {
+      if (!input.value) {
+        input.setCustomValidity("Please fill out this field.");
+        isValid = false;
+      } else {
+        input.setCustomValidity("");
+      }
+    });
+    if (!isValid) {
+      event.preventDefault();
+    }
+  });
+
+  function calculateAge(dateOfBirth) {
+    const dob = new Date(dateOfBirth);
+    const now = new Date();
+    let age = now.getFullYear() - dob.getFullYear();
+    const monthDiff = now.getMonth() - dob.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < dob.getDate())) {
+      age--;
+    }
+    return age;
+  }
+</script>
+
+
+
+
+
+4. Create a Home page for a Car sale website with necessary images and navigation tabs which including a login page. Strictly use HTM5 semantic tags and CSS properties like transform/gradient.
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Car Sale Website - Home</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 32px;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+
+      nav li {
+        margin-right: 20px;
+      }
+
+      nav a {
+        color: #333;
+        text-decoration: none;
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: transform 0.2s ease;
+      }
+
+      nav a:hover {
+        transform: scale(1.1);
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      h2 {
+        font-size: 48px;
+        color: #fff;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        margin: 0;
+      }
+
+      p {
+        font-size: 24px;
+        color: #fff;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      .login-button {
+        background-color: #fff;
+        color: #333;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .login-button:hover {
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Car Sale Website</h1>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Cars</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h2>Welcome to our Car Sale Website</h2>
+      <p>Find your dream car today</p>
+      <button class="login-button">Login</button>
+    </main>
+  </body>
+</html>
+
+
+
+Create an HTML form for a signup page of a educational website with following fields
+User Name
+Email
+Password
+Strictly validate the above fields using java script code.
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Signup - Educational Website</title>
+    <style>
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      label {
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+
+      input {
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: none;
+      }
+
+      input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #0062cc;
+      }
+
+      .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <form onsubmit="return validateForm()">
+      <label for="username">User Name:</label>
+      <input type="text" id="username" name="username" required>
+      <span id="username-error" class="error"></span>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <span id="email-error" class="error"></span>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <span id="password-error" class="error"></span>
+
+      <input type="submit" value="Sign Up">
+    </form>
+
+    <script>
+      function validateForm() {
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const usernameError = document.getElementById("username-error");
+        const emailError = document.getElementById("email-error");
+        const passwordError = document.getElementById("password-error");
+
+        let valid = true;
+
+        // Validate username
+        if (username.length < 3) {
+          usernameError.innerText = "Username must be at least 3 characters";
+          valid = false;
+        } else {
+          usernameError.innerText = "";
+        }
+
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          emailError.innerText = "Invalid email address";
+          valid = false;
+        } else {
+          emailError.innerText = "";
+        }
+
+        // Validate password
+        if (password.length < 8) {
+          passwordError.innerText = "Password must be at least 8 characters";
+          valid = false;
+        } else {
+          passwordError.innerText = "";
+        }
+
+        return valid;
+      }
+    </script>
+  </body>
+</html>
+
+
+
+
+
+4. Design a web form for signing up with the following fields:
+⚫ Name: a required text input field for the user's name
+
+.Date of Birth: a required date input field for the user's date of birth Age: a range input field for the user's age, with a min value of 18 and a max value of 100
+Email: a required email input field for the user's email address Website: an optional URL input field for the user's website
+
+
+
+
+<form>
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required>
+
+  <label for="dob">Date of Birth:</label>
+  <input type="date" id="dob" name="dob" required>
+
+  <label for="age">Age:</label>
+  <input type="range" id="age" name="age" min="18" max="100" required>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="website">Website:</label>
+  <input type="url" id="website" name="website">
+
+  <input type="submit" value="Sign Up">
+</form>
+
+
+
+// Hide/show fields based on age
+const ageInput = document.getElementById("age");
+const emailInput = document.getElementById("email");
+const websiteInput = document.getElementById("website");
+
+function hideFields() {
+  emailInput.style.display = "none";
+  websiteInput.style.display = "none";
+}
+
+function showEmailField() {
+  emailInput.style.display = "block";
+}
+
+function hideWebsiteField() {
+  websiteInput.style.display = "none";
+}
+
+function showAllFields() {
+  emailInput.style.display = "block";
+  websiteInput.style.display = "block";
+}
+
+hideFields();
+
+ageInput.addEventListener("input", function() {
+  if (ageInput.value < 18) {
+    hideFields();
+  } else if (ageInput.value >= 18 && ageInput.value <= 25) {
+    showEmailField();
+    hideWebsiteField();
+  } else {
+    showAllFields();
+  }
+});
+
+// Inline validation for required fields
+const form = document.querySelector("form");
+const inputs = form.querySelectorAll("input[required]");
+
+function validateInput(input) {
+  if (input.validity.valid) {
+    input.setCustomValidity("");
+  } else {
+    input.setCustomValidity(`Please fill out ${input.name}`);
+  }
+}
+
+inputs.forEach(input => {
+  input.addEventListener("input", function() {
+    validateInput(input);
+  });
+});
+
+// Helper function to calculate age based on date of birth
+function calculateAge(birthDateString) {
+  const birthDate = new Date(birthDateString);
+  const now = new Date();
+  const ageInMilliseconds = now - birthDate;
+  const ageInYears = ageInMilliseconds / 1000 / 60 / 60 / 24 / 365.25;
+  return Math.floor(ageInYears);
+}
