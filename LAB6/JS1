@@ -1,0 +1,9 @@
+<html>
+<body>
+<h1>FrontEnd</h1>
+<p>JavaScript</p>
+<script>
+window.alert(50+60);
+</script>
+</body>
+</html>
