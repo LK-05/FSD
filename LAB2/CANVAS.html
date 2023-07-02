@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>CANVAS</title>
+<style>
+canvas {
+               border: 1px solid black;
+        }
+</style>
+</head>
+<Body background="C:\Users\hp\Desktop\FSD\LAB2\canvas.jpg">  
+<center>
+<header>
+<center><h1>CANVAS DRAWING</h1><br>
+<p>Draw on the canvas by clicking and dragging the mouse</p>
+</header>
+<article>
+<h2>Canvas</h2>
+<canvas id = "myCanvas" width ="500" height ="500"
+onmousedown="startDrawing(event)"
+onmousemove="drawLine(event)"
+onmouseup="stoptDrawing(event)">
+</canvas> 
+</article> 
+<script>  
+var canvas = document.getElementById("myCanvas");  
+var ctx = canvas.getContext("2d");
+var isDrawing = false;
+function startDrawing(event) {
+                                   isDrawing = true;
+                                    var x = event.clientX - canvas.offsetLeft;
+                                    var y = event.clientY- canvas.offsetTop;
+                                   ctx.strokeStyle = "red"; 
+                                   ctx.beginPath();
+                                   ctx.moveTo(x,y);
+                                 }
+        function drawLine(event) {
+                                             if (isDrawing) { 
+                                                                 var x = event.clientX - canvas.offsetLeft;
+                                                                  var y = event.clientY- canvas.offsetTop;
+                                                                  ctx.lineTo(x,y);  
+                                                                ctx.stroke();
+                                                          }
+                                  }  
+                                  function stopDrawing(event){
+                                                                  isDrawing=false;
+                                                              }
+</script>  
+</body>
+</html>
